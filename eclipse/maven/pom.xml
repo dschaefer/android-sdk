@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<groupId>com.android.ide.eclipse</groupId>
+	<artifactId>parent</artifactId>
+	<version>22.6.3-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<tycho.version>0.20.0</tycho.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<url>http://download.eclipse.org/releases/kepler</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+	<modules>
+		<module>../plugins/com.android.ide.eclipse.adt</module>
+		<module>../plugins/com.android.ide.eclipse.adt.overlay</module>
+		<module>../plugins/com.android.ide.eclipse.adt.package</module>
+		<module>../plugins/com.android.ide.eclipse.base</module>
+		<module>../plugins/com.android.ide.eclipse.ddms</module>
+		<module>../plugins/com.android.ide.eclipse.gldebugger</module>
+		<module>../plugins/com.android.ide.eclipse.hierarchyviewer</module>
+		<module>../plugins/com.android.ide.eclipse.ndk</module>
+		<module>../plugins/com.android.ide.eclipse.traceview</module>
+
+		<module>../features/com.android.ide.eclipse.adt</module>
+		<module>../features/com.android.ide.eclipse.ddms</module>
+		<module>../features/com.android.ide.eclipse.gldebugger</module>
+		<module>../features/com.android.ide.eclipse.hierarchyviewer</module>
+		<module>../features/com.android.ide.eclipse.ndk</module>
+		<module>../features/com.android.ide.eclipse.traceview</module>
+
+		<module>repo</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<format>'x'yyyyMMddHHmm</format>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<includePackedArtifacts>true</includePackedArtifacts>
+					<resolver>p2</resolver>
+					<pomDependencies>consider</pomDependencies>
+					<environments>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
